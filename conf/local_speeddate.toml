@@ -1,0 +1,7 @@
+[logging]
+level = "debug"
+format = "term"
+
+[http_server]
+host = "localhost"
+port = "8080"
