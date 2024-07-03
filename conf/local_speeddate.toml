@@ -5,7 +5,7 @@ format = "term"
 [http_server]
 host = "localhost"
 port = "3000"
-jwt_expiration = 5m
+jwt_expiration = "5m"
 jwt_public_key = "./public.pem"
 jwt_public_key = "./private.pem"
 
