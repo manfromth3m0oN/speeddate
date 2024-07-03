@@ -2,19 +2,32 @@ package api
 
 import (
 	"context"
+	"crypto/rsa"
 	"errors"
 	"log/slog"
 	"net/http"
 	"sync"
 	"time"
 
+	"github.com/doug-martin/goqu/v9"
 	"github.com/gorilla/mux"
 	"github.com/manfromth3m0oN/speeddate/cmd/config"
 )
 
-func StartHTTPServer(ctx context.Context, wg *sync.WaitGroup, cfg config.Config) {
+// HTTPService holds the state for the HTTP Server
+type HTTPService struct {
+	DB      *goqu.Database
+	PrivKey *rsa.PrivateKey
+	PubKey  *rsa.PublicKey
+	JWTExpr time.Duration
+}
+
+// StartHTTPServer initializes resources and starts a http server as defined by the config
+func (h *HTTPService) StartHTTPServer(ctx context.Context, wg *sync.WaitGroup, cfg config.Config) {
 	defer wg.Done()
 	mux := mux.NewRouter()
+
+	h.RegisterRoutes(mux)
 
 	server := &http.Server{
 		Addr:    cfg.HTTPServer.Host + ":" + cfg.HTTPServer.Port,

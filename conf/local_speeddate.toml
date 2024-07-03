@@ -4,4 +4,13 @@ format = "term"
 
 [http_server]
 host = "localhost"
-port = "8080"
+port = "3000"
+jwt_expiration = 5m
+jwt_public_key = "./public.pem"
+jwt_public_key = "./private.pem"
+
+[database]
+host = "localhost"
+port = "5432"
+user = "postgres"
+password = "speeddate"
