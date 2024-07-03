@@ -7,7 +7,7 @@ host = "localhost"
 port = "3000"
 jwt_expiration = "5m"
 jwt_public_key = "./public.pem"
-jwt_public_key = "./private.pem"
+jwt_private_key = "./private.pem"
 
 [database]
 host = "postgres"

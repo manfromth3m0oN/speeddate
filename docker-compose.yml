@@ -12,7 +12,12 @@ services:
       - ./deployment/pg/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - POSTGRES_PASSWORD=speeddate
-
+  app:
+    image: speeddate
+    build: .
+    ports:
+      - 3000:3000
+      
   adminer:
     image: adminer
     restart: always
